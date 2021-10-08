@@ -12,34 +12,34 @@
 <body>
 
 <div class = 'calculator'>
-	<div class = 'screen'>0</div>
+	<input type = 'text' class = 'screen' autofocus pattern="0123456789\+-/\*">
 	<div class = 'keys'>
 		<div class = 'left'>
 			<div class = 'left-top'>
-				<button class = 'key number 7'>7</button>
-				<button class = 'key number 4'>4</button>
-				<button class = 'key number 1'>1</button>
+				<button data-key = '7' class = 'key number 7'>7</button>
+				<button data-key = '8' class = 'key number 8'>8</button>
+				<button data-key = '9' class = 'key number 9'>9</button>
 				
-				<button class = 'key number 8'>8</button>
-				<button class = 'key number 5'>5</button>
-				<button class = 'key number 2'>2</button>
+				<button data-key = '4' class = 'key number 4'>4</button>
+				<button data-key = '5' class = 'key number 5'>5</button>
+				<button data-key = '6' class = 'key number 6'>6</button>
 				
-				<button class = 'key number 9'>9</button>
-				<button class = 'key number 6'>6</button>
-				<button class = 'key number 3'>3</button>
+				<button data-key = '1' class = 'key number 1'>1</button>
+				<button data-key = '2' class = 'key number 2'>2</button>
+				<button data-key = '3' class = 'key number 3'>3</button>
 			</div>
 			<div class = 'left-bottom'>
-				<button class = 'key number 0'>0</button>
-				<button class = 'key operator .'>.</button>
-				<button class = 'key operator ='>=</button>
+				<button data-key = '0' class = 'key number 0'>0</button>
+				<button data-key = '.' class = 'key operator .'>.</button>
+				<button data-key = '=' class = 'key operator ='>=</button>
 			</div>
 		</div>
 		<div class = 'right'>
-			<button class = 'key operator del'><img src="backspace.svg"></button>
-			<button class = 'key operator /'>/</button>
-			<button class = 'key operator *'>*</button>
-			<button class = 'key operator -'>-</button>
-			<button class = 'key operator +'>+</button>
+			<button data-key = 'Backspace' class = 'key operator del'><img data-key = 'Backspace' src="backspace.svg"></button>
+			<button data-key = '/' class = 'key operator /'>/</button>
+			<button data-key = '*' class = 'key operator *'>*</button>
+			<button data-key = '-' class = 'key operator -'>-</button>
+			<button data-key = '+' class = 'key operator +'>+</button>
 		</div>
 
 	</div>
