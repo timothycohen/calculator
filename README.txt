@@ -14,6 +14,5 @@ tests checked:
     can put a negative sign on both numbers
     operators can be switched if they are the most recent input
     does not allow division by 0
-
-todo: can put a decimal point on the second number
-I should clean up the code with helper functions. make a function that checks if there are two operands or only one
+    can put only one decimal point on each of the two operands
+    rounds if necessary to 5 decimal points

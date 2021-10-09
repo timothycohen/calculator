@@ -3,7 +3,7 @@ keys = document.querySelector('.keys');
 
 // clicking the buttons or using the keyboard do the same thing
 window.addEventListener('keydown', e => newEntry(e));
-keys.onmousedown = e => {window.dispatchEvent(new KeyboardEvent('keydown', {'key':`${e.target.dataset.key}`} )); }
+keys.onclick = e => {window.dispatchEvent(new KeyboardEvent('keydown', {'key':`${e.target.dataset.key}`} )); }
 
 // clearing logic when backspace button is held
 let timeout;
@@ -13,6 +13,7 @@ document.querySelector('.del').onmouseup = () => clearTimeout(timeout);
 function pressingDown() {
 	timeout = setTimeout(function(){ screen.value = '' }, 750);
 }
+
 
 function newEntry(e) {
 	textSize();
@@ -62,7 +63,7 @@ function newEntry(e) {
 		return;
 	}
 
-	let parsedInput = parseInput(screen.value);
+	let parsedInput = parseInput(screen.value)
 	// If the left number contains a decimal and there is no operator, do not allow another decimal to be entered
 	if (parsedInput.left.indexOf('.') !== -1 && parsedInput.operator === '' && key === '.') return;
 	// If the right number contains a decimal, do not allow another decimal to be entered
@@ -83,14 +84,7 @@ function subtract (x, y){ return +x - +y; }
 
 function multiply (x, y){ return +x * +y; }
 
-function divide (x, y){
-	x = x === '.' ? 0 : x;
-	if (y === '.' || y === '' || y === 0) {
-		alert('Cannot divide by zero!');
-		return '';
-	}
-	return +x / +y;
-}
+function divide (x, y){ return +y !== 0 ? +x / +y : '--' }
 
 function calculate(operator) {
 	switch(operator){
@@ -111,9 +105,6 @@ function calculate(operator) {
 			answer = multiply(a[0], a[1])
 			break;
 	}
-
-	answer = Math.round(answer*100000)/100000;
-
 	screen.value = answer;
 	textSize();
 }
@@ -121,6 +112,7 @@ function calculate(operator) {
 function textSize() {
 	screen.value.length > 9 ? screen.style.fontSize = '2rem' : screen.style.fontSize = '3.5rem';
 }
+
 
 
 // takes a string which contains 0 or one operator and returns the left value, right value, and operator in an object
@@ -191,18 +183,10 @@ function testParseInput(){
 					'-',
 				]
 
-	tests.forEach(test =>	{
-		parsed = parseInput(test);
-	});
+					tests.forEach(test =>	{
+						parsed = parseInput(test)
+					});
+
+					// 1) I can't build an array and return it in one call. it returns as undefined
+					// 2) be careful when using a conditional inside an an array forEach function. If you return, it'll return the forEach function, not the forEach parent function!
 };
-
-
-// ######################################## DEBUGGING ########################################
-// 1) I can't build an array and return it in one call. it returns as undefined
-// 2) be careful when using a conditional inside an an array forEach function. If you return, it'll return the forEach function, not the forEach parent function!
-// 3.0) screen.value is picked up before the keydown event finishes so I can't send it to the parseInput function because the keystrokes are always one behind.
-// 3.1) That's because the input finishes on the keyup event. if i change the function to be triggered on a keyup event, I won't be able to prevent undesired characters from being entered in the text-input
-// 3.2) two possible solutions. A) create a keyup event after I've prevented the default action. B) switch from an input field to a regular div
-// 3.2 A) did not work. still one char behind: window.dispatchEvent(new KeyboardEvent('keyup', {'key':`${e.key}`} ));
-// 3.2 B) TODO
-// 4) although it'd be nice to factor out commonality to be used when adding later features, it already works with all the features I wanted, so I'm going to move on.
